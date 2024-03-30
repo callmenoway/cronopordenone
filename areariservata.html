@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Area riservata</title>
+</head>
+<body>
+  <h1>Area riservata</h1>
+  <form action="/api/manifestazione" method="post" enctype="multipart/form-data">
+    <input type="text" name="nome" placeholder="Nome manifestazione">
+    <input type="date" name="data">
+    <input type="text" name="tipo" placeholder="Tipo manifestazione">
+    <input type="file" name="file">
+    <button type="submit">Carica</button>
+  </form>
+  <script src="areariservata.js"></script>
+</body>
+</html>
