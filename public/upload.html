@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <!-- Aggiungi un pulsante per cancellare tutti i file -->
+    <button class="delete-button" onclick="deleteFiles()">Elimina Gara</button>
+    <script>
+        function deleteFiles() {
+            fetch('/delete', { method: 'POST' })
+                .then(() => window.location.reload());
+        }
+    </script>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="title">Nome Manifestazione:</label>
+        <input type="text" id="title" name="title">
+        <label for="pdf">PDF:</label>
+        <input type="file" id="pdf" name="pdfs" multiple>
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>

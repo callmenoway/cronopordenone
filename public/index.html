@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cronometristi Pordenone</title>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="./images/logoassociazione.jpg" alt="logo1">
+            <img src="./images/logofederale.jpg" alt="logo2">
+        </div>
+        <div class="title-container">
+            <h1 style="color:blue; margin-top: 0px;"> Associazione Cronometristi "Ivo Rosset" Pordenone</h1>
+            <center>
+                <h2 style="color:red; font-size: 30px;" id="race-title"></h2>
+            </center>
+            
+        </div>
+        <button onclick="window.location.href='login.html'">Area Riservata</button>
+    </div>
+
+    <!-- Sostituisci l'iframe con una tabella -->
+    <table id="pdf-table">
+        <thead>
+            <tr>
+                <th>Nome file</th>
+            </tr>
+        </thead>
+        <tbody id="pdf-list"></tbody>
+    </table>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            height: 80px;
+        }
+        .header button {
+            padding: 10px 20px;
+            background-color: blue;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .pdf-viewer {
+            width: 70%;
+            height: 70%;
+            border: 1px solid #ccc;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            height: 80px;
+        }
+        .header button {
+            padding: 10px 20px;
+            background-color: blue;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .pdf-viewer {
+            width: 70%;
+            height: 70%;
+            border: 1px solid #ccc;
+            /*margin-top: 200px; */
+        }
+        #pdf-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #pdf-table th, #pdf-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #pdf-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #pdf-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #pdf-table a {
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+
+    <script>
+        window.onload = function() {
+            fetch('/data.json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('race-title').textContent = data.title;
+
+                    const list = document.getElementById('pdf-list');
+                    data.files.forEach(file => {
+                        const tr = document.createElement('tr');
+                        const td = document.createElement('td');
+                        const a = document.createElement('a');
+                        a.href = '/uploads/' + file;
+                        a.textContent = file;
+                        td.appendChild(a);
+                        tr.appendChild(td);
+                        list.appendChild(tr);
+                    });
+                });
+        };
+    </script>
+</body>
+</html>
