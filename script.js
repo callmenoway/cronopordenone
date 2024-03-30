@@ -1,7 +1,10 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
+
+const serverUrl = 'http://localhost:3000';
 
 const loadManifestazione = async () => {
-  const response = await fetch('/api/manifestazione');
+  const url = `${serverUrl}/api/manifestazione`;
+  const response = await fetch(url);
   const data = await response.json();
   if (data.length === 0) {
     document.querySelector('h1').textContent = 'Nessun risultato pubblicato';
