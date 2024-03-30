@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
+const basicAuth = require('express-basic-auth');
 dotenv.config();
 
 const app = express();
@@ -28,6 +29,15 @@ app.post('/login', (req, res) => {
         res.send('Invalid credentials.');
     }
 });
+
+app.get('/upload.html', basicAuth({
+    users: { 'noway': '2134' },
+    challenge: true,
+    realm: 'Imb4T3st4pp',
+}), (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'protected-page.html'));
+});
+
 
 // Modifica la configurazione di multer per accettare più file
 app.post('/upload', upload.array('pdfs'), (req, res) => {
